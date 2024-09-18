@@ -1,10 +1,11 @@
 import React from 'react';
-import BarcodeScanner from './BarcodeScanner';
+import TemplateScanner from './pages/templateScanner';
+
 
 function App() {
   return (
     <div className="App">
-      <BarcodeScanner />
+      <TemplateScanner /> 
     </div>
   );
 }
