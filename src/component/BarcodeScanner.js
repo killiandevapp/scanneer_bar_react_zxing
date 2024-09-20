@@ -273,7 +273,9 @@ const Barcode = ({ setTriggerScanning, setScannedCode, triggerScanning, setSwitc
         (result, error) => {
           if (result) {
             setScannedCode(result.getText());
-            setTriggerScanning(true);
+            console.log('tt');
+            
+            //setTriggerScanning(true);
             setIsScanning(false); 
             setSwitchComponent(undefined);
             readerRef.current.stopContinuousDecode(); // Arrêter le scan
@@ -289,7 +291,7 @@ const Barcode = ({ setTriggerScanning, setScannedCode, triggerScanning, setSwitc
         console.log('Délai dépassé');
         nettoyerScanner();
         setSwitchComponent(!switchComponent);
-      }, 1000500);
+      }, 4000);
 
     } catch (err) {
       console.error("Erreur lors du démarrage du scan", err);
@@ -332,7 +334,7 @@ const Barcode = ({ setTriggerScanning, setScannedCode, triggerScanning, setSwitc
         playsInline
       />
     </div>
-    <button onClick={demarrerScan}>fffffff</button></>
+    </>
   );
 };
 

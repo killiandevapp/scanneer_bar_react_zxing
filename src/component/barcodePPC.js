@@ -7,10 +7,15 @@ const BarcodeScannerPPC = ({ onDetected }) => {
   const scannerRef = useRef(null);
   const [currentReaderIndex, setCurrentReaderIndex] = useState(0);
   const listFormat = [
-    ["ean_reader","ean_8_reader"],
-    ["code_128_reader", "code_39_reader"],
-    ["code_93_reader", "codabar_reader"]
+    ["ean_reader","code_128_reader"]
   ];
+
+
+  // const listFormat = [
+  //   ["ean_reader","code_128_reader"],
+  //   ["code_128_reader", "code_39_reader"],
+  //   ["code_93_reader", "codabar_reader"]
+  // ];
   let detectionTimer;
   let lastDetectionTime = 0;
 
@@ -42,13 +47,16 @@ const BarcodeScannerPPC = ({ onDetected }) => {
           facingMode: "environment"
         }
       },
-
+      decoder: {
+        readers: ["ean_reader", "code_128_reader"] // Limitez aux lecteurs nécessaires
+      },
+   
       locate: true,
       locator: {
         patchSize: "medium",
         halfSample: true
       },
-      frequency: 4
+      frequency: 10
     }, function (err) {
       if (err) {
         console.error(err);
@@ -102,6 +110,11 @@ const BarcodeScannerPPC = ({ onDetected }) => {
   //   setCurrentReaderIndex((prevIndex) => (prevIndex + 1) % listFormat.length);
   //   setScanning(true);
   // };
+  const changeReader = () => {
+    Quagga.stop();
+    setCurrentReaderIndex((prevIndex) => (prevIndex + 1) % listFormat.length);
+    setScanning(true);
+  };
 
   return (
     <div>

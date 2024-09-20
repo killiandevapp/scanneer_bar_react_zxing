@@ -75,22 +75,29 @@ const TemplateScanner = () => {
     const [codeBarrePPC, setCodeBarrePPC] = useState('');
     // Etat verifiant si un code a bien etait crée
     const [choiceScann, setChoiceScanne] = useState(false)
-    console.log(switchComponent);
+
+    console.log('SwitchComponent : ' + switchComponent);
+    console.log('triggerScanning : ' + triggerScanning);
+    console.log('scannedCode : ' + scannedCode);
+    console.log('choiceScann : ' + choiceScann);
+
+
+    console.log('-----------------------------------------------------------');
+    
+    
+    
+    
+    
 
 
     // Quand la variable stockant le code change 
     useEffect(() => {
+        console.log('jjjj');
+        
         // Si il y a un code alor on remet setTriggerScanning a true ansi que setChoiceScanne
         // setTriggerScanning va delancher le useEffect dans le composant enfant
         // setChoiceScanne va permettre au useEffect de detecter qu'il y a bien un code
-        if (scannedCode) {
-            setTriggerScanning(true)
-            setChoiceScanne(true)
-            
-          
-        } else {
-           
-        }
+     
     }, [scannedCode])
 
 // Déclanche une fonction qui va changer une variable et tout remmetre a 0
@@ -102,7 +109,13 @@ const TemplateScanner = () => {
         setTriggerScanning(!triggerScanning);
         setScannedCode(null);
         setCodeBarrePPC('');
-        setSwitchComponent(false)
+        // Si le scanner est en mode active 
+        if(!isScanning){
+           setSwitchComponent(false)
+        }else{
+            setSwitchComponent(undefined)
+        }
+
     };
 
     return (
@@ -124,7 +137,7 @@ const TemplateScanner = () => {
             <>
             {switchComponent != undefined ? (
                 switchComponent ? (
-                    <p>teste</p>
+                    <LogicBarreCode setCodeBarrePPC={setCodeBarrePPC} />
                 ) : (
                     <BarcodeScanner
                         setTriggerScanning={setTriggerScanning}
@@ -137,7 +150,7 @@ const TemplateScanner = () => {
                         choiceScann={choiceScann}
                     />
                 )
-            ): <p>It's undefined</p>}</>
+            ): null}</>
             </div>
             <button
                 className='bg-[#0084ca] p-[15px] ml-[25px] rounded-3xl text-white mb-[35px] mt-[35px]'

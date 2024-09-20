@@ -4,31 +4,31 @@ import Quagga from '@ericblade/quagga2';
 
 const LogicBarreCode = ({setCodeBarrePPC}) => {
   const [scannedCode, setScannedCode] = useState('');
-  const [dataTest, setDataTest] = useState([]);
+  const [newData, setNewData] = useState([]);
   const [numberResponseMap, setNumberResponseMap] = useState({
     goodOccurance: 0,
     badOccurance: 0
   });
-console.log(dataTest);
+console.log(newData);
 
   useEffect(() => {
-    if (scannedCode !== '' && dataTest.length < 50) {
+    if (scannedCode !== '' && newData.length < 50) {
       const transformedNumber = parseInt(scannedCode);
-      setDataTest(prevDataTest => [...prevDataTest, transformedNumber]);
+      setNewData(prevDataTest => [...prevDataTest, transformedNumber]);
     }
 
-    if (dataTest.length === 50) {
-      const existDouble = dataTest.filter((item, index) => dataTest.indexOf(item) !== index);
+    if (newData.length === 50) {
+      const existDouble = newData.filter((item, index) => newData.indexOf(item) !== index);
       setNumberResponseMap({
         goodOccurance: existDouble.length,
         badOccurance: 50 - existDouble.length
       });
 
-      const calculatePourcentage = (numberResponseMap.goodOccurance * 100) / dataTest.length;
+      const calculatePourcentage = (numberResponseMap.goodOccurance * 100) / newData.length;
       console.log(calculatePourcentage);
       Quagga.stop();
     }
-  }, [scannedCode, dataTest]);
+  }, [scannedCode, newData]);
 
   const handleDetected = (code) => {
     setScannedCode(code);
