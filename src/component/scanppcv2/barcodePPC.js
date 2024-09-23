@@ -48,7 +48,7 @@ const BarcodeScannerPPC = ({ onDetected }) => {
         }
       },
       decoder: {
-        readers: ["ean_reader", "code_128_reader"] // Limitez aux lecteurs nécessaires
+        readers:  ["ean_reader","code_128_reader", "code_39_reader", "code_93_reader", "codabar_reader"] // Limitez aux lecteurs nécessaires
       },
    
       locate: true,
