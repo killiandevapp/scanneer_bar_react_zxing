@@ -19,22 +19,23 @@ const TemplateBarcodeScannePPCv1 = ({ setSwitchComponent, setCodeBarrePPC }) => 
     // Choix de pourcentage pour la validation des occurance
     const choicePourcent = 70;
     // Choix de la taille du tableau validant les condition
-    const choiceLenghtTab = 50;
+    const choiceLenghtTab = 150;
     // Déclancher quand j'ai un nouveau code 
     useEffect(() => {
-        console.log('new data : ' + newData);
+        
         // Remplie un tableau de code
-        if (scannedCode !== '' && newData.length < 50) {
+        if (scannedCode !== '' && newData.length < choiceLenghtTab) {
             const transformedNumber = parseInt(scannedCode);
             setNewData(prevDataTest => [...prevDataTest, transformedNumber]);
         }
          // Quand la taille du tableau est égale a choiceLenghtTab
-        if (newData.length === 50 || newData.length >= 50 && activateScanner) {
+        if (newData.length === choiceLenghtTab || newData.length >= choiceLenghtTab && activateScanner) {
             // Liste le nombre de bonne et de mauvaise occurance
             const existDouble = newData.filter((item, index) => newData.indexOf(item) !== index);
             setNumberResponseMap({
                 goodOccurance: existDouble.length,
-                badOccurance: 50 - existDouble.length
+                badOccurance: choiceLenghtTab - existDouble.length
+
             });
            // Calculer le pourcentage de bonne occurance
             const calculatePourcentage = (existDouble.length * 100) / newData.length;
@@ -57,13 +58,11 @@ const TemplateBarcodeScannePPCv1 = ({ setSwitchComponent, setCodeBarrePPC }) => 
                 }
                 setCodeBarrePPC(maxNumber)
                 setActivateScanner(false)
-                console.log(maxNumber);
             }
 
         }
     }, [scannedCode, newData]);
-    console.log(newData);
-    console.log(pourcentResponse);
+
 
 
 

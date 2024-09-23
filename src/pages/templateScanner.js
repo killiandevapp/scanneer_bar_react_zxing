@@ -25,12 +25,13 @@ const TemplateScanner = () => {
         setTriggerScanning(!triggerScanning);
         setScannedCode(null);
         setCodeBarrePPC('');
-        // Si le scanner est en mode active 
-        if (!isScanning) {
-            setSwitchComponent(false)
-        } else {
-            setSwitchComponent(undefined)
-        }
+        setSwitchComponent(false)
+        // if (!isScanning) {
+        //     setSwitchComponent(false)
+        // } else {
+        //     setSwitchComponent(undefined)
+        // }
+
 
     };
 
@@ -51,28 +52,28 @@ const TemplateScanner = () => {
             ) : null}
             <div className='flex justify-center'>
                 <>
-                   {isLoading ? (<div>Chargement en cours...</div>) 
-                   : (
-                    switchComponent != undefined ? (
-                        switchComponent ? (
-                            <TemplateBarcodeScannePPCv1
-                                setSwitchComponent={setSwitchComponent}
-                                setCodeBarrePPC={setCodeBarrePPC} />
+                    {isLoading ? (<div>Chargement en cours...</div>)
+                        : (
+                            switchComponent != undefined ? (
+                                switchComponent ? (
+                                    <TemplateBarcodeScannePPCv1
+                                        setSwitchComponent={setSwitchComponent}
+                                        setCodeBarrePPC={setCodeBarrePPC} />
 
-                        ) : (
-                            <BarcodeScanner
-                                setIsLoading={setIsLoading}
-                                setTriggerScanning={setTriggerScanning}
-                                triggerScanning={triggerScanning}
-                                scannedCode={scannedCode}
-                                setScannedCode={setScannedCode}
-                                setSwitchComponent={setSwitchComponent}
-                                switchComponent={switchComponent}
-                                setIsScanning={setIsScanning}
+                                ) : (
+                                    <BarcodeScanner
+                                        setIsLoading={setIsLoading}
+                                        setTriggerScanning={setTriggerScanning}
+                                        triggerScanning={triggerScanning}
+                                        scannedCode={scannedCode}
+                                        setScannedCode={setScannedCode}
+                                        setSwitchComponent={setSwitchComponent}
+                                        switchComponent={switchComponent}
+                                        setIsScanning={setIsScanning}
 
-                            />
-                        )
-                    ) : null)}</>
+                                    />
+                                )
+                            ) : null)}</>
             </div>
             <button
                 className='bg-[#0084ca] p-[15px] ml-[25px] rounded-3xl text-white mb-[35px] mt-[35px]'

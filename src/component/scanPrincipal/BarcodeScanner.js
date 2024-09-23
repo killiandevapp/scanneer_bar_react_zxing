@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BrowserMultiFormatReader } from '@zxing/browser';
+import { BrowserMultiFormatReader , BrowserCodeReader} from '@zxing/browser';
 
 
 // Définition d'un composant de gestion d'erreurs
